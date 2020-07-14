@@ -26,9 +26,9 @@ app.use('/list', battleRouter); //returns array of distinct locations
 if(process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
   // If no API routes are hit, send the React app
-  app.use(function(req, res) {
-	res.sendFile(path.join(__dirname, './client/build/index.html'));
-});
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname,"client", "build", "index.html"));
+  });
 }
 
 app.listen(port, () => {
